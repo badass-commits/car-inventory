@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${db_name}
+      MYSQL_USER: ${db_user}
+      MYSQL_PASSWORD: ${db_password}
+      MYSQL_ROOT_PASSWORD: ${db_password}
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - car-inventory-db:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+volumes:
+  car-inventory-db:
